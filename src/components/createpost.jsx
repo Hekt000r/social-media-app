@@ -17,17 +17,17 @@ function CreatePost({ IsAuth }) {
     if (!file) {
         alert("Please choose a file first!")
     }
-
+  
     const storageRef = ref(storage,`/files/${file.name}`)
     const uploadTask = uploadBytesResumable(storageRef, file);
-
+  
     uploadTask.on(
         "state_changed",
         (snapshot) => {
             const percent = Math.round(
                 (snapshot.bytesTransferred / snapshot.totalBytes) * 100
             );
-
+  
             // update progress
             setPercent(percent);
         },
@@ -36,11 +36,12 @@ function CreatePost({ IsAuth }) {
             // download url
             getDownloadURL(uploadTask.snapshot.ref).then((url) => {
                 setImageUrl(url); // Save the image URL to state
+                alert("Uploaded image"); // Show alert after image is uploaded
             });
         }
     ); 
   }
-
+  
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 

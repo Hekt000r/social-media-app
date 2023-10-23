@@ -5,10 +5,11 @@ import Login from "./components/login";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import CreatePost from "./components/createpost";
-import Posts from "./components/posts";
+
 import Home from "./components/home";
 import {FaBars} from "react-icons/fa";
-import Prrofile from "./components/profile";
+import Profile from "./components/profile";
+
 function App() {
 
   const [isAuth, setIsAuth] = useState(false)
@@ -41,6 +42,7 @@ function App() {
         {isAuth ? 
         (<>
         <li><Link to="/createpost">Create a post</Link></li>
+        <li><Link to="/profile">My Profile</Link></li>  
         </>): 
         (<></>)}
       </ul>
@@ -60,7 +62,7 @@ function App() {
           <Route path="/login" element={<Login setIsAuth={setIsAuth} />}></Route>
           <Route path="/createpost" element={<CreatePost/>}></Route>
           <Route path="/images" element={<div>not ready</div>}></Route>
-          <Route path="/profile" element={<Profile/>}></Route>
+          <Route path="/profile" element={<Profile isAuth={isAuth}/>}></Route>
         </Routes>
       </Router>
     </>
