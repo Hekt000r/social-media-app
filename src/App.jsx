@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { auth } from "./components/firebase-config";
-
+import Navbar from "./components/navbar";
 import Login from "./components/login";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import { signOut } from "firebase/auth";
 import CreatePost from "./components/createpost";
 import Posts from "./components/posts";
 import Home from "./components/home";
-
+import {FaBars} from "react-icons/fa";
+import Prrofile from "./components/profile";
 function App() {
 
   const [isAuth, setIsAuth] = useState(false)
@@ -22,11 +23,17 @@ function App() {
   return (
     <>
       <Router>
-      <div class="navbar  top-0 left-0 right-0 z-50 bg-white shadow-lg border-none">
+        <Navbar isAuth={isAuth}></Navbar>
+      <div class="navbar fixed   top-0 left-0 right-0 z-50 bg-white shadow-lg border-none">
   <div class="navbar-start">
     <div class="dropdown">
       <label tabindex="0" class="btn btn-ghost btn-circle">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
+        {isAuth ? (
+           <img src={auth.currentUser.photoURL} className="w-10 h-10 rounded-full" alt="profile" />
+        ) : (
+          <FaBars></FaBars>
+        )}
+      
       </label>
       <ul tabindex="0" class="menu menu-compact dropdown-content mt-5 p-2 shadow-lg bg-base-100 rounded-box w-52">
         <li><Link to="/">Home</Link></li>
@@ -53,6 +60,7 @@ function App() {
           <Route path="/login" element={<Login setIsAuth={setIsAuth} />}></Route>
           <Route path="/createpost" element={<CreatePost/>}></Route>
           <Route path="/images" element={<div>not ready</div>}></Route>
+          <Route path="/profile" element={<Profile/>}></Route>
         </Routes>
       </Router>
     </>

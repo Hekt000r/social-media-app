@@ -59,15 +59,18 @@ function CreatePost({ IsAuth }) {
   
 
   return (
-    <div className="CreatePostPage ml-[30%]">
-     <div>
+    <div className="CreatePostPage mt-16 ml-[30%]">
+     <div className="mt-20">
      <textarea onChange={(e) => {setTitle(e.target.value)}} className="textarea textarea-accent w-[50%]" rows="1" placeholder="Title"></textarea>
      
      </div>
      <div>
-     <input type="file" onChange={handleChange}/>
-     <button onClick={handleUpload}>Upload Image</button> {/* Button to upload the image */}
-     <p>select image</p>
+      <div className="upload">
+      <input type="file" className="btn-sm" onChange={handleChange}/>
+     <button className="btn btn-outline btn-success btn-sm   " onClick={handleUpload}>Upload Image</button> {/* Button to upload the image */}
+     
+      </div>
+    
      <textarea onChange={(e) => {setContent(e.target.value)}} className="textarea textarea-accent w-[50%]" rows="4" placeholder="Content"></textarea>
      </div>
      <button className="btn btn-success" onClick={createPost}>Create post</button>
